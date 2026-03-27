@@ -1,0 +1,616 @@
+<HTML>
+
+<HEAD>
+
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
+    <script type="text/javascript">
+        var hipsDir = null;</script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport"
+        content="width=device-width, 
+                initial-scale=1.0"> -->
+    <style>
+        .popup {
+            position: absolute;
+            z-index: 1;
+            left: 60%;
+            top: 0;
+            width: 40%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: none;
+        }
+
+        .popup-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888888;
+            width: 90%;
+            font-weight: bolder;
+        }
+
+        .popup-content button {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .show {
+            display: block;
+        }
+
+        /* h1 {
+            color: green;
+        } */
+    </style>
+
+</HEAD>
+<!-- <H1> Classifications of CSCv2 sources within 4FGL-DR4 unidentified fields</H1> -->
+<!-- <H1> Multiwavelength Identification of 4FGL-DR4 Sources using MUWCLASS and 4XMM-DR13 <button id="myButton"> Project -->
+        <!-- Overview </button> </H1> -->
+<H1> Collections of SNRs </H1>
+<!-- This Web resource contains HiPS(*) components for <B>ESO EPO</B> progressive survey. -->
+
+
+<!-- <div id="myPopup" class="popup">
+    <div class="popup-content">
+        <h2>Project goals</h2>
+        <p>We plan to investigate the nature of particle accelerators in unidentified GeV gamma-ray sources with the aid
+            of a comprehensive,
+            automated multi-wavelength (MW) analysis tool we developed. We focus on unidentified 4FGL-DR4 sources (see
+            the visualization of 4FGL-DR4 catalog at <a href='https://muwclass.github.io/GCLASS/'>this website</a>)
+            that have been observed by <a href='https://cxc.cfa.harvard.edu/csc/'>Chandra Source Catalog v2.0</a>. As
+            the result of this project, we expect
+            to
+        <ol>
+            <li>increase the number of identified gamma-ray sources,</li>
+            <li>isolate a fraction of gamma-ray sources without plausible counterparts at other wavelengths (e.g.
+                transients), </li>
+            <li>gain insight into the particle acceleration processes in gamma-ray sources,</li>
+            <li>classify a large number of Galactic X-ray sources.</li>
+        </ol>
+        </p>
+        <h2>Work performed</h2>
+        <p>We collected multwavelength properties of all X-ray sources in 109 unidentified 4FGL sources using the
+            Chandra X-ray Source catalog and multiwavelength properties from Gaia-DR3, 2MASS,
+            and WISE catalogs. We used the machine-learning approach implemented in our MUWCLASS pipeline (see e.g., <a
+                href='https://ui.adsabs.harvard.edu/abs/2022ApJ...941..104Y/abstract'>Yang et al., 2022</a>), which is
+            available at <a href='https://github.com/MUWCLASS/MUWCLASS'>MUWCLASS GitHub Repository</a>.
+            The pipeline relies on the training dataset of ~3,000 X-ray sources that have known astrophysical types
+            (currently these are LM-STAR, HM-STAR, YSO, AGN, LMXB, HMXB, CV, NS), available at this <a
+                href='https://muwclass.github.io/XCLASS_CSCv2/'>visualization website</a>.
+            We used this pipeline to classify 1908 X-ray sources whose classifications are provided in the table below.
+        </p>
+        <h2>Funding support</h2>
+        <p>This work is supported by the National Aeronautics and Space Administration (NASA) through the Astrophysics
+            Data Analysis Program (ADAP) award 80NSSC19K0576.</p>
+
+        <button id="closePopup">
+            Close
+        </button>
+    </div>
+</div> -->
+
+
+
+<script>
+    myButton.addEventListener("click", function () {
+        myPopup.classList.add("show");
+    });
+    closePopup.addEventListener("click", function () {
+        myPopup.classList.remove("show");
+    });
+    window.addEventListener("click", function (event) {
+        if (event.target == myPopup) {
+            myPopup.classList.remove("show");
+        }
+    });
+</script>
+
+
+
+
+<TABLE>
+    <TR>
+        <TD>
+            <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+            <script type="text/javascript" src="./aladin.js" charset="utf-8"></script>
+            <div id="aladin-lite-div" style="width:1100px;height:800px">
+                <div
+                    style="max-width: 30%; background-color: rgba(255, 255, 255, 0.6); z-index: 20; position: absolute; left: 40%;top: 2%;">
+                    <span id="previousField" style="cursor: pointer;">&#x2190;</span><select name="fields"
+                        id="field-select">
+                        <option value="">--Choose a field</option>
+                    </select><span id="nextField" style="cursor: pointer;">&#x2192;</span>
+                </div>
+                <!-- <div style="background-color: rgba(255, 255, 255, 0.6); z-index: 20; position: absolute; left: 10px;bottom: 30%;">&nbsp;&nbsp;Overlay opacity:<br><input id="opacity" type="range" min="0" max="1" step="0.05" value="1"></div> -->
+            </div>
+
+
+            <!-- Show sources with CT greater than:
+            <input id='slider' style='vertical-align:middle;width:40vw;' step='0.1' min='0' max='10' type='range'
+                value='0'>
+            <span id='pmVal'>0</span><br><br>
+            <div id='aladin-lite-div' style='width: 400px;height: 5px;'></div>
+
+            and with Significance greater than:
+            <input id='slider2' style='vertical-align:middle;width:40vw;' step='0.1' min='3' max='1000' type='range'
+                value='3'>
+            <span id='sigVal'>3</span><br><br>
+            <div id='aladin-lite-div' style='width: 400px;height: 5px;'></div> -->
+
+
+
+
+            <script type="text/javascript">
+
+
+
+                // fields selection
+                //const fields = [ 'NGC 1300', 'TYC 8998-760-1', 'Messier 18', 'IC 2944', 'EIS0046-2930', 'NGC 5139', 'NGC 2023', 'NGC 6537', 'Messier 96', '[FSR2007] 1735', 'SDSS J103027.09+052455.0'];
+
+                var fields = [
+                    { name: "G327.4+0.4", coord: "237.0880311 -53.755006" },
+                    { name: "2CXO J132642.6-472723", coord: "201.677833	-47.4566" },
+                
+                ]
+
+
+
+                // fields.sort();
+                console.log(fields.length + ' objects in list');
+                const fieldSelect = document.getElementById('field-select');
+                for (var k = 0; k < fields.length; k++) {
+                    var opt = document.createElement('option');
+                    opt.value = fields[k].coord;
+                    opt.innerHTML = fields[k].name;
+                    fieldSelect.appendChild(opt);
+                }
+                
+
+                
+
+                // Update when user selects a field
+                
+                fieldSelect.addEventListener("change", function () {
+                    if (this.value.length > 0) {
+                        aladin.gotoObject(this.value);
+                        const fieldName = fields.find(f => f.coord === this.value)?.name;
+                        console.log("Selected field:", fieldName);
+                        updateSummary(fieldName);
+                    }
+                });
+
+                const previousFieldFn = function () {
+                    const idxSelected = fields.map(e => e.coord).indexOf(fieldSelect.value); //fields.indexOf(fieldSelect);
+                    if (idxSelected > 0) {
+                        fieldSelect.value = fields[idxSelected - 1].coord;
+                        fieldSelect.dispatchEvent(new Event('change'));
+                    }
+                };
+
+                //console.log(fieldSelect.name);
+
+                const nextFieldFn = function () {
+                    const idxSelected = fields.map(e => e.coord).indexOf(fieldSelect.value);
+                    if (idxSelected < fields.length - 1) {
+                        fieldSelect.value = fields[idxSelected + 1].coord;
+                        fieldSelect.dispatchEvent(new Event('change'));
+                    }
+                };
+
+
+
+                document.getElementById('previousField').addEventListener('click', previousFieldFn);
+                document.addEventListener('keydown', (event) => { if (event.keyCode == 37) previousFieldFn(); })
+
+                document.getElementById('nextField').addEventListener('click', nextFieldFn);
+                document.addEventListener('keydown', (event) => { if (event.keyCode == 39) nextFieldFn(); })
+
+
+                // listener for zoom in / zoom out
+                document.addEventListener('keydown', function (e) {
+                    if (e.keyCode == 73) {
+                        aladin.increaseZoom();
+                    }
+                    if (e.keyCode == 79) {
+                        aladin.decreaseZoom();
+                    }
+                });
+
+                fieldSelect.addEventListener('change', function () {
+                    fieldSelect.blur();
+                });
+
+                var target = '201.6970000 -47.4794722';
+                fieldSelect.value = target;
+                var fov = 12 / 60.;
+                const params = new URLSearchParams(location.search);
+                if (params.has('target')) {
+                    target = params.get('target');
+                }
+                if (params.has('fov')) {
+                    fov = parseFloat(params.get('fov'));
+                }
+
+                let aladin;
+                A.init.then(() => {
+
+                    var pmThreshold = 0;
+                    var sigThreshold = 0;
+
+                    // var slider = document.getElementById('slider');
+                    // slider.oninput = function () {
+                    //     pmThreshold = this.value;
+                    //     $('#pmVal').html(pmThreshold);
+                    //     hips.reportChange();
+                    // }
+
+                    // var sigThreshold = 0;
+
+                    // var slider = document.getElementById('slider2');
+                    // slider.oninput = function () {
+                    //     sigThreshold = this.value;
+                    //     $('#sigVal').html(sigThreshold);
+                    //     hips.reportChange();
+                    // }
+
+                    // var myFilterFunction = function (source) {
+                    //     var totalPm = parseFloat(source.data['CT']);
+                    //     var signif = parseFloat(source.data['significance']);
+                    //     if (isNaN(totalPm) || isNaN(signif)) {
+                    //         return false;
+                    //     }
+                    //     return totalPm > pmThreshold && signif > sigThreshold;
+                    // }
+
+                    // define custom draw function
+                    // var drawFunction = function (source, canvasCtx, viewParams) {
+                    //     canvasCtx.beginPath();
+                    //     canvasCtx.arc(source.x, source.y, 8, 0, 2 * Math.PI, false);
+                    //     canvasCtx.closePath();
+                    //     // canvasCtx.strokeStyle = '#c38';
+                    //     canvasCtx.strokeStyle = source.data['color'];
+                    //     canvasCtx.lineWidth = 3;
+                    //     canvasCtx.globalAlpha = 0.7,
+                    //         canvasCtx.stroke();
+                    //     var fov = Math.max(viewParams['fov'][0], viewParams['fov'][1]);
+
+                    //     // object name is displayed only if fov<10°
+                    //     if (fov > 10) {
+                    //         return;
+                    //     }
+
+                    //     canvasCtx.globalAlpha = 0.9;
+                    //     canvasCtx.globalAlpha = 1;
+
+                    //     var xShift = 20;
+
+                    //     canvasCtx.font = '15px Arial'
+                    //     canvasCtx.fillStyle = '#eee';
+                    //     // canvasCtx.fillText(source.data['name'], source.x + xShift, source.y -4);
+
+                    //     // object type is displayed only if fov<2°
+                    //     if (fov > 0.05) {
+                    //         return;
+                    //     }
+                    //     canvasCtx.font = '12px Arial'
+                    //     canvasCtx.fillStyle = '#abc';
+                    //     canvasCtx.fillText(source.data['Class'], source.x + 2 + xShift, source.y + 10);
+                    // };
+
+                    // // define custom draw function
+                    // var drawFunction2 = function (source, canvasCtx, viewParams) {
+                    //     canvasCtx.beginPath();
+                    //     // canvasCtx.arc(source.x, source.y,10, 0, 2 * Math.PI, false);
+                    //     canvasCtx.moveTo(source.x, source.y - 9);
+                    //     canvasCtx.lineTo(source.x - 8, source.y + 5);
+                    //     canvasCtx.lineTo(source.x + 8, source.y + 5);
+                    //     canvasCtx.closePath();
+                    //     // canvasCtx.strokeStyle = '#c38';
+                    //     canvasCtx.strokeStyle = source.data['color'];
+                    //     canvasCtx.lineWidth = 3;
+                    //     canvasCtx.globalAlpha = 0.7,
+                    //         canvasCtx.stroke();
+                    //     var fov = Math.max(viewParams['fov'][0], viewParams['fov'][1]);
+
+                    //     // object name is displayed only if fov<10°
+                    //     if (fov > 10) {
+                    //         return;
+                    //     }
+
+                    //     canvasCtx.globalAlpha = 0.9;
+                    //     canvasCtx.globalAlpha = 1;
+
+                    //     var xShift = 20;
+
+                    //     canvasCtx.font = '15px Arial'
+                    //     canvasCtx.fillStyle = '#eee';
+                    //     // canvasCtx.fillText(source.data['name'], source.x + xShift, source.y -4);
+
+                    //     // object type is displayed only if fov<2°
+                    //     if (fov > 0.05) {
+                    //         return;
+                    //     }
+                    //     canvasCtx.font = '12px Arial'
+                    //     canvasCtx.fillStyle = '#abc';
+                    //     canvasCtx.fillText(source.data['Class'], source.x + 2 + xShift, source.y + 10);
+                    // };
+
+                    // // define custom draw function
+                    // var drawFunction3 = function (source, canvasCtx, viewParams) {
+                    //     canvasCtx.beginPath();
+                    //     canvasCtx.rect(source.x - 8, source.y - 8, 16, 16)
+                    //     canvasCtx.closePath();
+                    //     // canvasCtx.strokeStyle = '#c38';
+                    //     canvasCtx.strokeStyle = source.data['color'];
+                    //     canvasCtx.lineWidth = 3;
+                    //     canvasCtx.globalAlpha = 0.7,
+                    //         canvasCtx.stroke();
+                    //     var fov = Math.max(viewParams['fov'][0], viewParams['fov'][1]);
+
+                    //     // object name is displayed only if fov<10°
+                    //     if (fov > 10) {
+                    //         return;
+                    //     }
+
+                    //     canvasCtx.globalAlpha = 0.9;
+                    //     canvasCtx.globalAlpha = 1;
+
+                    //     var xShift = 20;
+
+                    //     canvasCtx.font = '15px Arial'
+                    //     canvasCtx.fillStyle = '#eee';
+                    //     // canvasCtx.fillText(source.data['name'], source.x + xShift, source.y -4);
+
+                    //     // object type is displayed only if fov<2°
+                    //     if (fov > 0.05) {
+                    //         return;
+                    //     }
+                    //     canvasCtx.font = '12px Arial'
+                    //     canvasCtx.fillStyle = '#abc';
+                    //     canvasCtx.fillText(source.data['Class'], source.x + 2 + xShift, source.y + 10);
+                    // };
+
+
+
+                    // aladin = A.aladin("#aladin-lite-div", { survey: "https://esdchips.esac.esa.int/XMM-Newton/EPIC-RGB/", name: "XMM", target: target, fov: fov });
+                    // //aladin.toggleFullscreen();
+
+                    aladin = A.aladin("#aladin-lite-div", { survey: "https://cdaftp.cfa.harvard.edu/cxc-hips", name: "CSC", target: target, fov: fov });
+                    //aladin.toggleFullscreen();
+
+                    aladin.setOverlayImageLayer('ivo://cxc.harvard.edu/P/cda/hips/allsky/rgb'); // CDS/P/HGPS/Flux
+                    aladin.getOverlayImageLayer().setAlpha(0.5);
+
+                    aladin.setOverlayImageLayer('https://schen70.github.io/CSC_Omega_Cen_Viewer/HIPS_RGB'); // CDS/P/HGPS/Flux
+                    aladin.getOverlayImageLayer().setAlpha(1);
+
+
+                    var overlay = A.graphicOverlay({ color: 'white', lineWidth: 15 });
+                    aladin.addOverlay(overlay);
+
+                    // read the coordinates of the error ellipse from the csv file and add to the overlay
+                    var csvUrl = 'https://schen70.github.io/CSC_Omega_Cen_Viewer/HIPS_RGB/csc_regions.csv';
+                    $.get(csvUrl, function (data) {
+                        var lines = data.split('\n');
+                        for (var i = 1; i < lines.length; i++) {
+                            var line = lines[i].trim();
+                            if (line.length > 0) {
+                                var parts = line.split(',');
+                                var ra = parseFloat(parts[0]);
+                                var dec = parseFloat(parts[1]);
+                                var a = parseFloat(parts[2]);
+                                var b = parseFloat(parts[3]);
+                                var pa = parseFloat(parts[4]);
+                                overlay.addFootprints([
+                                    A.ellipse(ra, dec, a, b, pa)
+                                ]);
+                            }
+                        }
+                    });
+                    
+                    // overlay.addFootprints([
+                    //     A.ellipse(201.6970000, -47.4794722, 0.0025, 0.0015, 30)
+                    // ]);
+                    // overlay.add(); // radius in degrees , use the polygon to use the calculated coordinates of ellipses
+
+                    // var cat = A.catalog({ name: 'popup', sourceSize: 4 });
+                    // aladin.addCatalog(cat);
+                    // cat.addSources([A.marker(134.70883712404034, -47.50226943621272, { popupTitle: '2CXO J085850.1-473008', popupDesc: '134.708837 -47.502269 1.31" <a target="_blank" href="https://simbad.u-strasbg.fr/simbad/sim-coo?CooDefinedFrames=none&CooEpoch=2000&Coord=134.70883712404034%20-47.50226943621272&submit=submit%20query&Radius.unit=arcsec&CooEqui=2000&CooFrame=FK5&Radius=20">Simbad</a><br/>Fb=4.7e-15 HR_h(ms)=0.9 P_intra=1.00<br/><a target="_blank" href="./images/cross-match/J085850.1-473008_MW_match.fits_explain_1.png">1 CP(s)</a>(p_c=3.0% p_any=99.6%)<br/>1st CP: J=17.9 <br/>Classified as YSO 41&plusmn12% (CT=1.2)<br/>Without CP classified as NS 43&plusmn19% (CT=0.4)<br/>Combined classified as YSO 40&plusmn12% (CT=1.1)<br/>' })]);
+
+
+                    // var hips = A.catalogFromURL('https://raw.githubusercontent.com/MrGTout/4FGL_XMM/main/4FGL_XMM_v4_com.vot', { onClick: 'showTable', sourceSize: 50, name: 'XMM Comp', shape: drawFunction, filter: myFilterFunction }); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
+                    // aladin.addCatalog(hips);
+
+                    // $('input[type=radio][name=otype]').change(function () {
+                    //     requestedOtype = this.value;
+                    //     hips.reportChange();
+                    // });
+
+                    // var hips4 = A.catalogFromURL('https://raw.githubusercontent.com/MrGTout/4FGL_XMM/main/4FGL_XMM_v4_ext.vot', { onClick: 'showTable', sourceSize: 50, name: 'XMM Ext', shape: drawFunction2, filter: myFilterFunction }); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
+                    // aladin.addCatalog(hips4);
+
+                    // $('input[type=radio][name=otype]').change(function () {
+                    //     requestedOtype = this.value;
+                    //     hips.reportChange();
+                    // });
+
+                    // var hips2 = A.catalogFromURL('https://raw.githubusercontent.com/huiyang-astro/FGL-aladin-lite-test/main/CSCv2_TD.vot', { onClick: 'showPopup', sourceSize: 200, name: 'CSC_TD', shape: drawFunction3 }); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
+                    // aladin.addCatalog(hips2);
+
+                    // $('input[type=radio][name=otype]').change(function () {
+                    //     requestedOtype = this.value;
+                    //     hips2.reportChange();
+                    // });
+
+                    // var hips23 = A.catalogFromURL('https://raw.githubusercontent.com/MrGTout/4FGL_XMM/main/4FGL_XMM_TD.vot', { onClick: 'showTable', sourceSize: 200, name: 'XMM_TD', shape: drawFunction3 }); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
+                    // aladin.addCatalog(hips23);
+
+                    // $('input[type=radio][name=otype]').change(function () {
+                    //     requestedOtype = this.value;
+                    //     hips2.reportChange();
+                    // });
+
+                    var hips12 = A.catalogHiPS('https://axel.u-strasbg.fr/HiPSCatService/Simbad', { onClick: 'showPopup', name: 'Simbad', sourceSize: 5, color: 'magenta' });
+                    hips12.hide();
+                    aladin.addCatalog(hips12);
+
+                    // var hips3 = A.catalogFromURL('https://raw.githubusercontent.com/huiyang-astro/FGL-aladin-lite-test/main/MSC.vot', { onClick: 'showPopup', sourceSize: 20, name: 'radio', shape: 'plus', color: 'yellow' }); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
+                    // aladin.addCatalog(hips3);
+
+                    // var hips9 = A.catalogFromURL('https://raw.githubusercontent.com/huiyang-astro/FGL-aladin-lite-test/main/ATNF_NS.vot', {onClick: 'showPopup', sourceSize: 20,  name:'ATNF',shape:'plus', color:'magenta'}); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
+                    //  aladin.addCatalog(hips9);
+
+                    // var hips10 = A.catalogFromURL('https://raw.githubusercontent.com/huiyang-astro/FGL-aladin-lite-test/main/TeVCat.vot', {onClick: 'showPopup', sourceSize: 20,  name:'TeVCat',shape:'plus', color:'gold'}); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
+                    //  aladin.addCatalog(hips10);
+
+                    // var hips11 = A.catalogFromURL('https://raw.githubusercontent.com/huiyang-astro/FGL-aladin-lite-test/main/BeStar.vot', {onClick: 'showPopup', sourceSize: 20,  name:'BeStar',shape:'plus', color:'rgb(0,255,0)'}); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
+                    //  aladin.addCatalog(hips11);
+
+
+                });
+
+
+            </script>
+        </TD>
+        <TD>
+
+
+
+            <h4>
+                </p>
+
+
+                <!-- <button id="readmeButton"> README </button> -->
+
+                <!-- <div id="readmePopup" class="popup">
+                    <div class="popup-content">
+                        <h2>Aladin-Lite Visualization Window</h2>
+                        <ol>
+                            <li>Please select your interested FGL source from the drop-down list.</li>
+                            <li>You can filter on the classification confidence threshold (CT, the higher the value is
+                                the more confidence is the classification, a default value CT=2 is used for confident
+                                classifications) and the X-ray source significance by moving the slidebars below the
+                                visualization plot. </li>
+                            <li>You can select image layers and catalog markers from the Manage Layers Button. More
+                                details on <a href='https://aladin.cds.unistra.fr/AladinLite/doc/'>Aladin Lite
+                                    documentation page</a>.,</li>
+                            <li>The cross-matching plot includes the X-ray source and its positional uncertainty in blue
+                                error ellipse, and its potential MW counterparts in green error ellipses. The MW
+                                catalogs used for each MW counterpart are overplotted with the error ellipses where g is
+                                for gaia, t for tmass, a for allwise, and c for catwise2020, followed by p_i from NWAY.
+                                The title of the plot includes p_any from NWAY and chance coincidence probability p_c.
+                            </li>
+                        </ol>
+
+
+                        <h2>Interactive Table</h2>
+                        <ol>
+                            <li> All X-ray sources without significance or CT cuts per FGL field will be present in the
+                                table.</li>
+                            <li> To select only the potential X-ray counterparts of the GeV source, you can click on
+                                "Candidates" option from the Filter button. To select all sources from the field or all
+                                X-ray sources from all FGL fields, you can select "All field sources" or "All sources".
+                            </li>
+                            <li> You can choose to show more columns by selecting the column names from the Column
+                                visibillity button.</li>
+                            <li> You can download the csv file of the table <a href="./MUWCLASS_4FGL-DR4.csv"
+                                    download="">here.</a></li>
+                        </ol>
+                        Column definitions:
+                        <ul>
+                            <li>2CXO_Name: X-ray name from CSCv2.0</li>
+                            <li>FGL: GeV source name from 4FGL-DR4 </li>
+                            <li>GLON, GLAT: Galactic coordinate of the gamma-ray source </li>
+                            <li>Class: classification from MUWCLASS </li>
+                            <li>CT: classification confidence threshold</li>
+                            <li>S/N: X-ray significance</li>
+                            <li>Fb,s,m,h: X-ray band fluxes at the broad (0.5-7 keV), soft (0.5-1.2 keV), medium (1.2-2
+                                keV), hard (2-7 keV) bands</li>
+                            <li>HR_hms, HM_ms, HR_hm: X-ray hardness ratios </li>
+                            <li>P_inter, P_intra: X-ray inter-observation (between observation) and intra-observation
+                                (within one observation) variability probability </li>
+                            <li>Nobs: number of observations with net_cnt>50</li>
+                            <li>Counts: total net counts from observations with net_cnt>50 </li>
+                            <li>PL &Gamma;: photon index from xspowerlaw (PL) model </li>
+                            <li>kT_MK: The temperature of the plasma, in keV, from xsmekal model</li>
+                            <li>kT_BB: The temperature of the object, in keV, from xsbbodyrad model</li>
+                            <li>&Delta;log10(Z): Bayesian evidence (0 for the best model)</li>
+                            <li>log10(nH): from the best fitted model </li>
+                            <li>nH_LAB: <a
+                                    href="https://lambda.gsfc.nasa.gov/product/foreground/fg_LAB_HI_Survey_info.html">LAB_HI_Survey
+                                    Maps</a> </li>
+                            <li>Gmag,BPmag,RPmag: Gaia DR3 magnitudes </li>
+                            <li>Jmag,Hmag,Kmag: 2mass magnitudes </li>
+                            <li>W1mag,W2mag: WISE magnitudes </li>
+                            <li>rgeo: Gaia EDR3 geometric distance posterior, in pc</li>
+                            <li>RPlx: Gaia DR3 Parallax divided by its standard error </li>
+                            <li>PM: Gaia DR3 Total proper motion, in mas/yr</li>
+                            <li>epsi: Gaia DR3 Excess noise of the source, in mas</li>
+                            <li>ruwe: Gaia DR3 Renormalised unit weight error</li>
+                        </ul>
+                        
+                        <button id="closereadmePopup">
+                            Close
+                        </button>
+                    </div>
+                </div> -->
+
+                <!-- <script>
+                    readmeButton.addEventListener("click", function () {
+                        readmePopup.classList.add("show");
+                    });
+                    closereadmePopup.addEventListener("click", function () {
+                        readmePopup.classList.remove("show");
+                    });
+                    window.addEventListener("click", function (event) {
+                        if (event.target == readmePopup) {
+                            readmePopup.classList.remove("show");
+                        }
+                    });
+                </script> -->
+
+                <!-- <h3>Classification Summary</h3>
+                <div id="classification-summary">
+                    <p><strong></strong> <span id="g_prop1">—</span></p>
+                    <p><strong></strong> <span id="g_prop2">—</span></p>
+                    <p><strong></strong> <span id="coverfact">—</span></p>
+                    <p><strong></strong> <span id="all_clas">—</span></p>
+                    <p><strong></strong> <span id="conf_clas">—</span></p>
+                    <p><strong></strong> <span id="comments">—</span></p>
+                </div> -->
+
+
+        </TD>
+    </TR>
+</TABLE>
+
+
+<!-- <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Table with Toggleable Columns</title> -->
+
+<!-- Include jQuery -->
+<!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+
+<!-- Include DataTables CSS and JS -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script> -->
+
+<!-- Include DataTables ColumnVisibility extension CSS and JS -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
+<script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.colVis.min.js"></script> -->
+
+
+
+
+
+
+</HTML>
