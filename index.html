@@ -152,13 +152,27 @@
                 // fields selection
                 //const fields = [ 'NGC 1300', 'TYC 8998-760-1', 'Messier 18', 'IC 2944', 'EIS0046-2930', 'NGC 5139', 'NGC 2023', 'NGC 6537', 'Messier 96', '[FSR2007] 1735', 'SDSS J103027.09+052455.0'];
 
-                var fields = [
-                    { name: "G327.4+0.4", coord: "237.0880311 -53.755006" },
-                    { name: "2CXO J132642.6-472723", coord: "201.677833	-47.4566" },
+                // var fields = [
+                //     { name: "G327.4+0.4", coord: "237.0880311 -53.755006" },
+                //     { name: "2CXO J132642.6-472723", coord: "201.677833	-47.4566" },
                 
-                ]
+                // ]
 
-
+                // read fields from csv file
+                var fields = [];
+                $.get('https://schen70.github.io/CSC_Omega_Cen_Viewer/csc_regions.csv', function (data) {
+                    var lines = data.split('\n');
+                    for (var i = 1; i < lines.length; i++) {
+                        var line = lines[i].trim();
+                        if (line.length > 0) {
+                            var parts = line.split(',');
+                            console.log(parts);
+                            fields.push({ name: parts[0], coord: parts[1] + " " + parts[2] });
+                        }
+                    }
+                }
+                );
+                console.log(fields);
 
                 // fields.sort();
                 console.log(fields.length + ' objects in list');
@@ -383,10 +397,10 @@
                     aladin = A.aladin("#aladin-lite-div", { survey: "https://cdaftp.cfa.harvard.edu/cxc-hips", name: "CSC", target: target, fov: fov });
                     //aladin.toggleFullscreen();
 
-                    aladin.setOverlayImageLayer('ivo://cxc.harvard.edu/P/cda/hips/allsky/rgb'); // CDS/P/HGPS/Flux
-                    aladin.getOverlayImageLayer().setAlpha(0.5);
+                    // aladin.setOverlayImageLayer('ivo://cxc.harvard.edu/P/cda/hips/allsky/rgb');
+                    // aladin.getOverlayImageLayer().setAlpha(0.5);
 
-                    aladin.setOverlayImageLayer('https://schen70.github.io/CSC_Omega_Cen_Viewer/HIPS_RGB'); // CDS/P/HGPS/Flux
+                    aladin.setOverlayImageLayer('https://schen70.github.io/CSC_Omega_Cen_Viewer/HIPS_RGB');
                     aladin.getOverlayImageLayer().setAlpha(1);
 
 
@@ -394,20 +408,23 @@
                     aladin.addOverlay(overlay);
 
                     // read the coordinates of the error ellipse from the csv file and add to the overlay
-                    var csvUrl = 'https://schen70.github.io/CSC_Omega_Cen_Viewer/HIPS_RGB/csc_regions.csv';
+                    var csvUrl = 'https://schen70.github.io/CSC_Omega_Cen_Viewer/csc_regions.csv';
+
                     $.get(csvUrl, function (data) {
                         var lines = data.split('\n');
                         for (var i = 1; i < lines.length; i++) {
                             var line = lines[i].trim();
                             if (line.length > 0) {
                                 var parts = line.split(',');
-                                var ra = parseFloat(parts[0]);
-                                var dec = parseFloat(parts[1]);
-                                var a = parseFloat(parts[2]);
-                                var b = parseFloat(parts[3]);
-                                var pa = parseFloat(parts[4]);
+                                // need to convert to float
+                                var name = parts[0];
+                                var ra = parseFloat(parts[1]);
+                                var dec = parseFloat(parts[2]);
+                                var a = parseFloat(parts[3])/3600; // convert from arcsec to degree
+                                var b = parseFloat(parts[4])/3600; // convert from arcsec to degree
+                                var pa = parseFloat(parts[5])+90.0; // add 90 degree to convert from CSC convention to Aladin convention
                                 overlay.addFootprints([
-                                    A.ellipse(ra, dec, a, b, pa)
+                                    A.ellipse(ra, dec, a, b, pa, { color: 'green', lineWidth: 1})
                                 ]);
                             }
                         }
