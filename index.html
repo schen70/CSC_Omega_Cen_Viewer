@@ -458,13 +458,13 @@
                         // cat.addSources([A.marker(134.70883712404034, -47.50226943621272, { popupTitle: '2CXO J085850.1-473008', popupDesc: '134.708837 -47.502269 1.31" <a target="_blank" href="https://simbad.u-strasbg.fr/simbad/sim-coo?CooDefinedFrames=none&CooEpoch=2000&Coord=134.70883712404034%20-47.50226943621272&submit=submit%20query&Radius.unit=arcsec&CooEqui=2000&CooFrame=FK5&Radius=20">Simbad</a><br/>Fb=4.7e-15 HR_h(ms)=0.9 P_intra=1.00<br/><a target="_blank" href="./images/cross-match/J085850.1-473008_MW_match.fits_explain_1.png">1 CP(s)</a>(p_c=3.0% p_any=99.6%)<br/>1st CP: J=17.9 <br/>Classified as YSO 41&plusmn12% (CT=1.2)<br/>Without CP classified as NS 43&plusmn19% (CT=0.4)<br/>Combined classified as YSO 40&plusmn12% (CT=1.1)<br/>' })]);
 
 
-                        var hips = A.catalogFromURL('https://schen70.github.io/CSC_Omega_Cen_Viewer/NGC5139_aladin.vot', { onClick: 'showTable', sourceSize: 50, name: 'XCLASS', shape: drawFunction, filter: myFilterFunction }); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
+                        var hips = A.catalogFromURL('https://schen70.github.io/CSC_Omega_Cen_Viewer/NGC5139_aladin.vot', { onClick: 'showPopup', sourceSize: 50, name: 'XCLASS', shape: drawFunction, filter: myFilterFunction }); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
                         aladin.addCatalog(hips);
 
-                        // $('input[type=radio][name=otype]').change(function () {
-                        //     requestedOtype = this.value;
-                        //     hips.reportChange();
-                        // });
+                        $('input[type=radio][name=otype]').change(function () {
+                            requestedOtype = this.value;
+                            hips.reportChange();
+                        });
 
                         // var hips4 = A.catalogFromURL('https://raw.githubusercontent.com/MrGTout/4FGL_XMM/main/4FGL_XMM_v4_ext.vot', { onClick: 'showTable', sourceSize: 50, name: 'XMM Ext', shape: drawFunction2, filter: myFilterFunction }); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
                         // aladin.addCatalog(hips4);
@@ -635,7 +635,7 @@
 
 <script type="text/javascript">
     function arrayToTable(tableData) {
-        var table = $('<table id="interactiveTable" class="display dataTable" style=""></table>');
+        var table = $('<table id="interactiveTable" class="display dataTable" style="width:100%"></table>');
         $(tableData).each(function (i, rowData) {
             if (i == 0) {
                 var thead = $('<thead></thead>');
