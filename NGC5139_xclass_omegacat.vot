@@ -6,8 +6,8 @@
   <TABLE>
    <FIELD ID="name_lit" arraysize="24" datatype="unicodeChar" name="name_lit"/>
    <FIELD ID="name_csc" arraysize="21" datatype="unicodeChar" name="name_csc"/>
-   <FIELD ID="RA" datatype="double" name="RA"/>
-   <FIELD ID="DEC" datatype="double" name="DEC"/>
+   <FIELD ID="ra" datatype="double" name="ra"/>
+   <FIELD ID="dec" datatype="double" name="dec"/>
    <FIELD ID="Class" arraysize="5" datatype="unicodeChar" name="Class"/>
    <FIELD ID="Class_prob" datatype="double" name="Class_prob"/>
    <FIELD ID="Separation_HUGS_CSC" datatype="double" name="Separation_HUGS_CSC"/>
