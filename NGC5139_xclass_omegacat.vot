@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Produced with astropy.io.votable version 7.1.1
+     http://www.astropy.org/ -->
+<VOTABLE version="1.4" xmlns="http://www.ivoa.net/xml/VOTable/v1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ivoa.net/xml/VOTable/v1.3 http://www.ivoa.net/xml/VOTable/VOTable-1.4.xsd">
+ <RESOURCE type="results">
+  <TABLE>
+   <FIELD ID="name_lit" arraysize="24" datatype="unicodeChar" name="name_lit"/>
+   <FIELD ID="name_csc" arraysize="21" datatype="unicodeChar" name="name_csc"/>
+   <FIELD ID="ra_csc" datatype="double" name="ra_csc"/>
+   <FIELD ID="dec_csc" datatype="double" name="dec_csc"/>
+   <FIELD ID="Class" arraysize="3" datatype="unicodeChar" name="Class"/>
+   <FIELD ID="Class_prob" datatype="double" name="Class_prob"/>
+   <FIELD ID="Separation_HUGS_CSC" datatype="double" name="Separation_HUGS_CSC"/>
+   <FIELD ID="lum_aper90_avg_b" datatype="double" name="lum_aper90_avg_b"/>
+   <FIELD ID="lum_aper90_avg_s" datatype="double" name="lum_aper90_avg_s"/>
+   <FIELD ID="lum_aper90_avg_m" datatype="double" name="lum_aper90_avg_m"/>
+   <FIELD ID="lum_aper90_avg_h" datatype="double" name="lum_aper90_avg_h"/>
+   <FIELD ID="hard_ms" datatype="double" name="hard_ms"/>
+   <FIELD ID="hard_hm" datatype="double" name="hard_hm"/>
+   <FIELD ID="Star_ID" datatype="double" name="Star_ID"/>
+   <FIELD ID="F275W_HUGS_abs" datatype="double" name="F275W_HUGS_abs"/>
+   <FIELD ID="F336W_HUGS_abs" datatype="double" name="F336W_HUGS_abs"/>
+   <FIELD ID="F438W_HUGS_abs" datatype="double" name="F438W_HUGS_abs"/>
+   <FIELD ID="F606W_HUGS_abs" datatype="double" name="F606W_HUGS_abs"/>
+   <FIELD ID="F814W_HUGS_abs" datatype="double" name="F814W_HUGS_abs"/>
+   <DATA>
+    <TABLEDATA>
+     <TR>
+      <TD>2CXO J132643.2-473110-0</TD>
+      <TD>2CXO J132643.2-473110</TD>
+      <TD>201.68016666666665</TD>
+      <TD>-47.51976111111111</TD>
+      <TD>AB</TD>
+      <TD>0.41143</TD>
+      <TD/>
+      <TD>2.313167572275048e+30</TD>
+      <TD>1.6584554389224864e+30</TD>
+      <TD>6.547121333525617e+29</TD>
+      <TD>3.6062484461024385e+28</TD>
+      <TD>-0.4339258934806535</TD>
+      <TD>-1</TD>
+      <TD/>
+      <TD/>
+      <TD/>
+      <TD/>
+      <TD/>
+      <TD/>
+     </TR>
+     <TR>
+      <TD>2CXO J132643.2-473110-1</TD>
+      <TD>2CXO J132643.2-473110</TD>
+      <TD>201.68016666666665</TD>
+      <TD>-47.51976111111111</TD>
+      <TD>MSP</TD>
+      <TD>0.45435</TD>
+      <TD>0.2790125608444214</TD>
+      <TD>2.313167572275048e+30</TD>
+      <TD>1.6584554389224864e+30</TD>
+      <TD>6.547121333525617e+29</TD>
+      <TD>3.6062484461024385e+28</TD>
+      <TD>-0.4339258934806535</TD>
+      <TD>-1</TD>
+      <TD>583378</TD>
+      <TD>10.62515196054954</TD>
+      <TD>8.73378898414954</TD>
+      <TD>8.35467320374954</TD>
+      <TD>7.1705675401495395</TD>
+      <TD>6.40314305854954</TD>
+     </TR>
+     <TR>
+      <TD>2CXO J132643.2-473110-2</TD>
+      <TD>2CXO J132643.2-473110</TD>
+      <TD>201.68016666666665</TD>
+      <TD>-47.51976111111111</TD>
+      <TD>CV</TD>
+      <TD>0.3717499999999999</TD>
+      <TD>0.2933973371982574</TD>
+      <TD>2.313167572275048e+30</TD>
+      <TD>1.6584554389224864e+30</TD>
+      <TD>6.547121333525617e+29</TD>
+      <TD>3.6062484461024385e+28</TD>
+      <TD>-0.4339258934806535</TD>
+      <TD>-1</TD>
+      <TD>628088</TD>
+      <TD/>
+      <TD>9.92438898414954</TD>
+      <TD>10.210273203749543</TD>
+      <TD>8.68556754014954</TD>
+      <TD>7.547343058549542</TD>
+     </TR>
+     <TR>
+      <TD>2CXO J132643.2-473110-3</TD>
+      <TD>2CXO J132643.2-473110</TD>
+      <TD>201.68016666666665</TD>
+      <TD>-47.51976111111111</TD>
+      <TD>AB</TD>
+      <TD>0.87456</TD>
+      <TD>0.4074548184871673</TD>
+      <TD>2.313167572275048e+30</TD>
+      <TD>1.6584554389224864e+30</TD>
+      <TD>6.547121333525617e+29</TD>
+      <TD>3.6062484461024385e+28</TD>
+      <TD>-0.4339258934806535</TD>
+      <TD>-1</TD>
+      <TD>674980</TD>
+      <TD>5.4667519605495425</TD>
+      <TD>4.94248898414954</TD>
+      <TD>4.733473203749542</TD>
+      <TD>4.781867540149539</TD>
+      <TD>4.294543058549541</TD>
+     </TR>
+     <TR>
+      <TD>2CXO J132643.2-473110-4</TD>
+      <TD>2CXO J132643.2-473110</TD>
+      <TD>201.68016666666665</TD>
+      <TD>-47.51976111111111</TD>
+      <TD>AB</TD>
+      <TD>0.8662099999999999</TD>
+      <TD>0.4756746590137481</TD>
+      <TD>2.313167572275048e+30</TD>
+      <TD>1.6584554389224864e+30</TD>
+      <TD>6.547121333525617e+29</TD>
+      <TD>3.6062484461024385e+28</TD>
+      <TD>-0.4339258934806535</TD>
+      <TD>-1</TD>
+      <TD>1446567</TD>
+      <TD>5.809551960549539</TD>
+      <TD>5.172788984149539</TD>
+      <TD>5.597121193603742</TD>
+      <TD>4.85186754014954</TD>
+      <TD>4.292643058549542</TD>
+     </TR>
+     <TR>
+      <TD>2CXO J132643.2-473110-5</TD>
+      <TD>2CXO J132643.2-473110</TD>
+      <TD>201.68016666666665</TD>
+      <TD>-47.51976111111111</TD>
+      <TD>MSP</TD>
+      <TD>0.37798</TD>
+      <TD>0.553368330001831</TD>
+      <TD>2.313167572275048e+30</TD>
+      <TD>1.6584554389224864e+30</TD>
+      <TD>6.547121333525617e+29</TD>
+      <TD>3.6062484461024385e+28</TD>
+      <TD>-0.4339258934806535</TD>
+      <TD>-1</TD>
+      <TD>599544</TD>
+      <TD>10.32775196054954</TD>
+      <TD>11.28568898414954</TD>
+      <TD>10.755973203749543</TD>
+      <TD>9.096267540149539</TD>
+      <TD>7.911443058549539</TD>
+     </TR>
+     <TR>
+      <TD>2CXO J132643.2-473110-6</TD>
+      <TD>2CXO J132643.2-473110</TD>
+      <TD>201.68016666666665</TD>
+      <TD>-47.51976111111111</TD>
+      <TD>CV</TD>
+      <TD>0.51417</TD>
+      <TD>0.6273205876350403</TD>
+      <TD>2.313167572275048e+30</TD>
+      <TD>1.6584554389224864e+30</TD>
+      <TD>6.547121333525617e+29</TD>
+      <TD>3.6062484461024385e+28</TD>
+      <TD>-0.4339258934806535</TD>
+      <TD>-1</TD>
+      <TD>599549</TD>
+      <TD>7.4950519605495405</TD>
+      <TD>12.854688984149538</TD>
+      <TD>10.936373203749541</TD>
+      <TD>9.35646754014954</TD>
+      <TD>8.310943058549542</TD>
+     </TR>
+     <TR>
+      <TD>2CXO J132643.2-473110_ul</TD>
+      <TD>2CXO J132643.2-473110</TD>
+      <TD>201.68016666666665</TD>
+      <TD>-47.51976111111111</TD>
+      <TD>MSP</TD>
+      <TD>0.93617</TD>
+      <TD/>
+      <TD>2.313167572275048e+30</TD>
+      <TD>1.6584554389224864e+30</TD>
+      <TD>6.547121333525617e+29</TD>
+      <TD>3.6062484461024385e+28</TD>
+      <TD>-0.4339258934806535</TD>
+      <TD>-1</TD>
+      <TD/>
+      <TD>15.55745196054954</TD>
+      <TD>15.695788984149539</TD>
+      <TD>15.806873203749541</TD>
+      <TD>15.96486754014954</TD>
+      <TD>16.09514305854954</TD>
+     </TR>
+    </TABLEDATA>
+   </DATA>
+  </TABLE>
+ </RESOURCE>
+</VOTABLE>
