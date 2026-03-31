@@ -670,7 +670,7 @@
 
     $.ajax({
         type: "GET",
-        url: "https://schen70.github.io/CSC_Omega_Cen_Viewer/csc_regions.csv",
+        url: "https://schen70.github.io/CSC_Omega_Cen_Viewer/NGC5139_xclass_short.csv",
         success: function (data) {
             $('body').append(arrayToTable(Papa.parse(data).data));
             
@@ -687,9 +687,9 @@
                     // columnDefs: [
                     //     { targets: [2, 3, 8, 9, 10, 12, 13, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 27, 28, 30, 31, 33, 36, 37, 38, 39, 40], visible: false }, // Hide the Country column by default (index 2)
                     // ],
-                    columnDefs: [
-                        { targets: [4], visible: false },
-                    ],
+                    // columnDefs: [
+                    //     { targets: [4], visible: false },
+                    // ],
                     // order: [[8, 'des']], // Initial sorting by Name column in ascending order
 
                     buttons: [
