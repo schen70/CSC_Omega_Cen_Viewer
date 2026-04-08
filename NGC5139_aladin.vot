@@ -4,7 +4,7 @@
 <VOTABLE version="1.4" xmlns="http://www.ivoa.net/xml/VOTable/v1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ivoa.net/xml/VOTable/v1.3 http://www.ivoa.net/xml/VOTable/VOTable-1.4.xsd">
  <RESOURCE type="results">
   <TABLE>
-   <FIELD ID="name_lit" arraysize="24" datatype="unicodeChar" name="name_lit"/>
+   <FIELD ID="name" arraysize="24" datatype="unicodeChar" name="name"/>
    <FIELD ID="name_csc" arraysize="21" datatype="unicodeChar" name="name_csc"/>
    <FIELD ID="ra_csc" datatype="double" name="ra_csc"/>
    <FIELD ID="dec_csc" datatype="double" name="dec_csc"/>

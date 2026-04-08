@@ -18,6 +18,8 @@
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/buttons/3.2.6/js/buttons.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/buttons/3.2.6/js/dataTables.buttons.js"></script>
+    <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/buttons/3.2.6/js/buttons.colVis.min.js"></script>
 
 
@@ -57,6 +59,9 @@
             display: block;
         }
 
+        #aladin-lite-div option {
+            background-color: #ffffff;
+        }
         /* h1 {
             color: green;
         } */
@@ -131,8 +136,8 @@
 <TABLE>
     <TR>
         <TD>
-            <script type="text/javascript" src="./aladin.js" charset="utf-8"></script>
-            <div id="aladin-lite-div" style="width:1100px;height:800px">
+            <script type="text/javascript" src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
+            <div id="aladin-lite-div" style="width:1100px;      height:800px">
                 <div
                     style="max-width: 30%; background-color: rgba(255, 255, 255, 0.6); z-index: 20; position: absolute; left: 40%;top: 2%;">
                     <span id="previousField" style="cursor: pointer;">&#x2190;</span><select name="fields"
@@ -175,8 +180,9 @@
                 // read fields from csv file
                 var fields = [];
                 var csvUrl = 'https://schen70.github.io/CSC_Omega_Cen_Viewer/csc_regions.csv';
+                // var csvUrl = './csc_regions.csv';
 
-                $.get('https://schen70.github.io/CSC_Omega_Cen_Viewer/csc_regions.csv', function (data) {
+                $.get(csvUrl, function (data) {
                     var lines = data.split('\n');
                     for (var i = 1; i < lines.length; i++) {
                         var line = lines[i].trim();
@@ -219,8 +225,6 @@
                             fieldSelect.dispatchEvent(new Event('change'));
                         }
                     };
-
-                    //console.log(fieldSelect.name);
 
                     const nextFieldFn = function () {
                         const idxSelected = fields.map(e => e.coord).indexOf(fieldSelect.value);
@@ -325,105 +329,41 @@
                             if (fov > 0.05) {
                                 return;
                             }
-                            canvasCtx.font = '12px Arial'
-                            canvasCtx.fillStyle = '#abc';
-                            canvasCtx.fillText(source.data['Class'], source.x + 2 + xShift, source.y + 10);
+                            // canvasCtx.font = '12px Arial'
+                            // canvasCtx.fillStyle = '#abc';
+                            // canvasCtx.fillText(source.data['Class'], source.x + 2 + xShift, source.y + 10);
                         };
 
-                        // // define custom draw function
-                        // var drawFunction2 = function (source, canvasCtx, viewParams) {
-                        //     canvasCtx.beginPath();
-                        //     // canvasCtx.arc(source.x, source.y,10, 0, 2 * Math.PI, false);
-                        //     canvasCtx.moveTo(source.x, source.y - 9);
-                        //     canvasCtx.lineTo(source.x - 8, source.y + 5);
-                        //     canvasCtx.lineTo(source.x + 8, source.y + 5);
-                        //     canvasCtx.closePath();
-                        //     // canvasCtx.strokeStyle = '#c38';
-                        //     canvasCtx.strokeStyle = source.data['color'];
-                        //     canvasCtx.lineWidth = 3;
-                        //     canvasCtx.globalAlpha = 0.7,
-                        //         canvasCtx.stroke();
-                        //     var fov = Math.max(viewParams['fov'][0], viewParams['fov'][1]);
+                        var updateTableSelection = function(source) {
+                            if (source) {
+                                // Get the unique identifier (e.g., 2CXO_Name) from the clicked source data
+                                var sourceName = source.data['name_csc']; 
+                                
+                                // Access the DataTable instance
+                                var table = $('#interactiveTable').DataTable();
+                                
+                                // Filter the table (assuming column 0 is the Name column)
+                                // .search(query, isRegex, smartSearch, caseInsensitive)
+                                table.column(1).search(sourceName).draw();
+                                
+                                console.log("Filtering table for source: " + sourceName);
+                            }
+                        }
 
-                        //     // object name is displayed only if fov<10°
-                        //     if (fov > 10) {
-                        //         return;
-                        //     }
-
-                        //     canvasCtx.globalAlpha = 0.9;
-                        //     canvasCtx.globalAlpha = 1;
-
-                        //     var xShift = 20;
-
-                        //     canvasCtx.font = '15px Arial'
-                        //     canvasCtx.fillStyle = '#eee';
-                        //     // canvasCtx.fillText(source.data['name'], source.x + xShift, source.y -4);
-
-                        //     // object type is displayed only if fov<2°
-                        //     if (fov > 0.05) {
-                        //         return;
-                        //     }
-                        //     canvasCtx.font = '12px Arial'
-                        //     canvasCtx.fillStyle = '#abc';
-                        //     canvasCtx.fillText(source.data['Class'], source.x + 2 + xShift, source.y + 10);
-                        // };
-
-                        // // define custom draw function
-                        // var drawFunction3 = function (source, canvasCtx, viewParams) {
-                        //     canvasCtx.beginPath();
-                        //     canvasCtx.rect(source.x - 8, source.y - 8, 16, 16)
-                        //     canvasCtx.closePath();
-                        //     // canvasCtx.strokeStyle = '#c38';
-                        //     canvasCtx.strokeStyle = source.data['color'];
-                        //     canvasCtx.lineWidth = 3;
-                        //     canvasCtx.globalAlpha = 0.7,
-                        //         canvasCtx.stroke();
-                        //     var fov = Math.max(viewParams['fov'][0], viewParams['fov'][1]);
-
-                        //     // object name is displayed only if fov<10°
-                        //     if (fov > 10) {
-                        //         return;
-                        //     }
-
-                        //     canvasCtx.globalAlpha = 0.9;
-                        //     canvasCtx.globalAlpha = 1;
-
-                        //     var xShift = 20;
-
-                        //     canvasCtx.font = '15px Arial'
-                        //     canvasCtx.fillStyle = '#eee';
-                        //     // canvasCtx.fillText(source.data['name'], source.x + xShift, source.y -4);
-
-                        //     // object type is displayed only if fov<2°
-                        //     if (fov > 0.05) {
-                        //         return;
-                        //     }
-                        //     canvasCtx.font = '12px Arial'
-                        //     canvasCtx.fillStyle = '#abc';
-                        //     canvasCtx.fillText(source.data['Class'], source.x + 2 + xShift, source.y + 10);
-                        // };
-
-
-
-                        // aladin = A.aladin("#aladin-lite-div", { survey: "https://esdchips.esac.esa.int/XMM-Newton/EPIC-RGB/", name: "XMM", target: target, fov: fov });
-                        // //aladin.toggleFullscreen();
-
-                        aladin = A.aladin("#aladin-lite-div", { survey: "https://cdaftp.cfa.harvard.edu/cxc-hips", name: "CSC", target: target, fov: fov });
+                        aladin = A.aladin("#aladin-lite-div", { survey: "https://cdaftp.cfa.harvard.edu/cxc-hips", target: target, fov: fov,  showSettingsControl: true});
                         //aladin.toggleFullscreen();
 
                         // aladin.setOverlayImageLayer('ivo://cxc.harvard.edu/P/cda/hips/allsky/rgb');
                         // aladin.getOverlayImageLayer().setAlpha(0.5);
+                        
+                        var hipsimage = A.HiPS('https://schen70.github.io/CSC_Omega_Cen_Viewer/HIPS_RGB', {name: 'F275W/F435W/F814W', stretch: 'log'});
+                        // var hipsimage = A.HiPS('./HIPS_RGB', {name: 'F275W/F435W/F814W', stretch: 'log'});
+                        aladin.setOverlayImageLayer(hipsimage);
 
-                        aladin.setOverlayImageLayer('https://schen70.github.io/CSC_Omega_Cen_Viewer/HIPS_RGB');
-                        aladin.getOverlayImageLayer().setAlpha(1);
-
-
-                        var overlay = A.graphicOverlay({name: 'CSC', color: 'green', lineWidth: 3, selectionLineWidth: 10, opacity: 1});
+                        var overlay = A.graphicOverlay({name: 'CSC Sources', color: 'green', lineWidth: 3, selectionLineWidth: 10, opacity: 1});
                         aladin.addOverlay(overlay);
 
                         // read the coordinates of the error ellipse from the csv file and add to the overlay
-                        var csvUrl = 'https://schen70.github.io/CSC_Omega_Cen_Viewer/csc_regions.csv';
-
                         $.get(csvUrl, function (data) {
                             var lines = data.split('\n');
                             for (var i = 1; i < lines.length; i++) {
@@ -447,20 +387,11 @@
                                 }
                             }
                         });
-                        
-                        // overlay.addFootprints([
-                        //     A.ellipse(201.6970000, -47.4794722, 0.0025, 0.0015, 30)
-                        // ]);
-                        // overlay.add(); // radius in degrees , use the polygon to use the calculated coordinates of ellipses
-
-                        // var cat = A.catalog({ name: 'popup', sourceSize: 4 });
-                        // aladin.addCatalog(cat);
-                        // cat.addSources([A.marker(134.70883712404034, -47.50226943621272, { popupTitle: '2CXO J085850.1-473008', popupDesc: '134.708837 -47.502269 1.31" <a target="_blank" href="https://simbad.u-strasbg.fr/simbad/sim-coo?CooDefinedFrames=none&CooEpoch=2000&Coord=134.70883712404034%20-47.50226943621272&submit=submit%20query&Radius.unit=arcsec&CooEqui=2000&CooFrame=FK5&Radius=20">Simbad</a><br/>Fb=4.7e-15 HR_h(ms)=0.9 P_intra=1.00<br/><a target="_blank" href="./images/cross-match/J085850.1-473008_MW_match.fits_explain_1.png">1 CP(s)</a>(p_c=3.0% p_any=99.6%)<br/>1st CP: J=17.9 <br/>Classified as YSO 41&plusmn12% (CT=1.2)<br/>Without CP classified as NS 43&plusmn19% (CT=0.4)<br/>Combined classified as YSO 40&plusmn12% (CT=1.1)<br/>' })]);
 
 
-                        // var vot = A.catalogFromURL('https://schen70.github.io/CSC_Omega_Cen_Viewer/NGC5139_aladin.vot', { 
-                        var vot = A.catalogFromURL('https://raw.githubusercontent.com/schen70/CSC_Omega_Cen_Viewer/refs/heads/main/NGC5139_aladin.vot?token=GHSAT0AAAAAADVFJ6CSVIWUNJ4JCKOZKPDG2OUEXMQ', { 
-                            onClick: 'showPopup', sourceSize: 10, name: 'XCLASS', shape: drawFunction, raField: 'RA', decField: 'DEC', labelColumn: 'Class'}); //filter: myFilterFunction, displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
+                        var vot = A.catalogFromURL('https://schen70.github.io/CSC_Omega_Cen_Viewer/NGC5139_aladin.vot', { 
+                        // var vot = A.catalogFromURL('./NGC5139_aladin.vot', { 
+                            onClick: updateTableSelection, sourceSize: 10, name: 'XCLASS', shape: drawFunction, raField: 'RA', decField: 'DEC', displayLabel: true, labelColumn: 'assoc_number', labelColor: 'cyan', labelFont: '20px sans-serif'}); //filter: myFilterFunction, displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
                         aladin.addCatalog(vot);
 
                         $('input[type=radio][name=otype]').change(function () {
@@ -468,45 +399,11 @@
                             vot.reportChange();
                         });
 
-                        // var hips4 = A.catalogFromURL('https://raw.githubusercontent.com/MrGTout/4FGL_XMM/main/4FGL_XMM_v4_ext.vot', { onClick: 'showTable', sourceSize: 50, name: 'XMM Ext', shape: drawFunction2, filter: myFilterFunction }); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
-                        // aladin.addCatalog(hips4);
-
-                        // $('input[type=radio][name=otype]').change(function () {
-                        //     requestedOtype = this.value;
-                        //     hips.reportChange();
-                        // });
-
-                        // var hips2 = A.catalogFromURL('https://raw.githubusercontent.com/huiyang-astro/FGL-aladin-lite-test/main/CSCv2_TD.vot', { onClick: 'showPopup', sourceSize: 200, name: 'CSC_TD', shape: drawFunction3 }); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
-                        // aladin.addCatalog(hips2);
-
-                        // $('input[type=radio][name=otype]').change(function () {
-                        //     requestedOtype = this.value;
-                        //     hips2.reportChange();
-                        // });
-
-                        // var hips23 = A.catalogFromURL('https://raw.githubusercontent.com/MrGTout/4FGL_XMM/main/4FGL_XMM_TD.vot', { onClick: 'showTable', sourceSize: 200, name: 'XMM_TD', shape: drawFunction3 }); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
-                        // aladin.addCatalog(hips23);
-
-                        // $('input[type=radio][name=otype]').change(function () {
-                        //     requestedOtype = this.value;
-                        //     hips2.reportChange();
-                        // });
-
                         var hips12 = A.catalogHiPS('https://axel.u-strasbg.fr/HiPSCatService/Simbad', { onClick: 'showPopup', name: 'Simbad', sourceSize: 5, color: 'magenta' });
                         hips12.hide();
                         aladin.addCatalog(hips12);
+                        
 
-                        // var hips3 = A.catalogFromURL('https://raw.githubusercontent.com/huiyang-astro/FGL-aladin-lite-test/main/MSC.vot', { onClick: 'showPopup', sourceSize: 20, name: 'radio', shape: 'plus', color: 'yellow' }); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
-                        // aladin.addCatalog(hips3);
-
-                        // var hips9 = A.catalogFromURL('https://raw.githubusercontent.com/huiyang-astro/FGL-aladin-lite-test/main/ATNF_NS.vot', {onClick: 'showPopup', sourceSize: 20,  name:'ATNF',shape:'plus', color:'magenta'}); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
-                        //  aladin.addCatalog(hips9);
-
-                        // var hips10 = A.catalogFromURL('https://raw.githubusercontent.com/huiyang-astro/FGL-aladin-lite-test/main/TeVCat.vot', {onClick: 'showPopup', sourceSize: 20,  name:'TeVCat',shape:'plus', color:'gold'}); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
-                        //  aladin.addCatalog(hips10);
-
-                        // var hips11 = A.catalogFromURL('https://raw.githubusercontent.com/huiyang-astro/FGL-aladin-lite-test/main/BeStar.vot', {onClick: 'showPopup', sourceSize: 20,  name:'BeStar',shape:'plus', color:'rgb(0,255,0)'}); //,displayLabel: true, labelColumn: 'Class', labelColor: 'cyan', labelFont: '20px sans-serif', onClick: 'showTable',
-                        //  aladin.addCatalog(hips11);
 
 
                     });
@@ -514,9 +411,24 @@
 
                 });
 
+                
+                // // zoom to mouse position on wheel
+                // document.getElementById('aladin-lite-div').addEventListener('wheel', function(e) {
+                //     if (!aladin) return;
+                //     const rect = this.getBoundingClientRect();
+                //     const x = e.clientX - rect.left;
+                //     const y = e.clientY - rect.top;
+                //     try {
+                //         const world = aladin.pix2world(x, y);
+                //         if (world) {
+                //             aladin.gotoRaDec(world[0], world[1]);
+                //         }
+                //     } catch (err) {}
+                // }, { passive: true });
 
 
             </script>
+
         </TD>
         <TD>
 
@@ -632,10 +544,17 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interactive Table with Toggleable Columns</title>
+<title>Omega Cen Aladin Viewer</title>
 
 
 <script type="text/javascript">
+    // Remove the defaults
+    DataTable.defaults.layout = {
+        topStart: null,
+        topEnd: null,
+        bottomStart: null,
+        bottomEnd: null
+    };
     function arrayToTable(tableData) {
         var table = $('<table id="interactiveTable" class="display dataTable" style="width:100%"></table>');
         $(tableData).each(function (i, rowData) {
@@ -673,109 +592,69 @@
     $.ajax({
         type: "GET",
         url: "https://schen70.github.io/CSC_Omega_Cen_Viewer/NGC5139_aladin.csv",
+        // url: "NGC5139_aladin.csv",
         success: function (data) {
             $('body').append(arrayToTable(Papa.parse(data).data));
             
             $(document).ready(function () {
 
                 var table = $('#interactiveTable').DataTable({
-                    dom: 'Bflrtip',
+                    // dom: 'Bflrtip',
                     deferRender: true,
-                    paging: true,    
-                    pageLength: 100,
                     // scrollY: true,
                     // scrollX: true,
                     // fixedHeader: true,
                     // columnDefs: [
-                    //     { targets: [2, 3, 8, 9, 10, 12, 13, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 27, 28, 30, 31, 33, 36, 37, 38, 39, 40], visible: false }, // Hide the Country column by default (index 2)
-                    // ],
-                    // columnDefs: [
                     //     { targets: [4], visible: false },
                     // ],
                     // order: [[8, 'des']], // Initial sorting by Name column in ascending order
+                    layout: {
+                        top: ['pageLength', 
+                            'search', 
+                            {
+                                buttons: [
+                                    'colvis',
+                                    // Clears the search
+                                    {
+                                        text: 'Reset',
+                                        action: function (e, dt, node, config) {
+                                            dt.search('').columns().search('').draw(); 
+                                        }
+                                    
+                                    }
 
-                    buttons: [
-                        'colvis',
-                        // {
-                        //     extend: 'collection',
-                        //     text: 'Filter',
-                        //     buttons: [
-                        //         {
-                        //             text: 'Interesting',
-                        //             action: function (e, dt, node, config) {
-                        //                 dt.column(4).search('').draw();
-                        //             }
-                        //         },
-                        //         {
-                        //             text: 'All field sources',
-                        //             action: function (e, dt, node, config) {
-                        //                 dt.column(4).search('').draw();
-                        //             }
-                        //         },
-                        //         {
-                        //             text: 'All sources',
-                        //             action: function (e, dt, node, config) {
-                        //                 dt.column(4).search('').draw();
-                        //                 dt.column(4).search('').draw();
-                        //             }
-                        //         }
-                        //     ]
-                        // }
-                    ],
+
+                                ],
+                            }
+                        ],
+                        bottom: ['paging']
+                    }
 
                 });
-                // table.column(40).search('Y').draw();
-                table.column(39).search('134.8271 -43.7125').draw();
 
-                window.onload = function () {
-                    let
-                        g_prop = document.getElementById("g_prop"),
-                        all_clas = document.getElementById("all_clas"),
-                        conf_clas = document.getElementById("conf_clas"),
-                        mySelect = document.getElementById("field-select"),
-                        DescChange = document.getElementById("DescChange"),
-                        comment = document.getElementById("comments")
-                        ;
+                // window.onload = function () {
+                //     let
+                //         g_prop = document.getElementById("g_prop"),
+                //         all_clas = document.getElementById("all_clas"),
+                //         conf_clas = document.getElementById("conf_clas"),
 
+                //         DescChange = document.getElementById("DescChange"),
+                //         comment = document.getElementById("comments")
+                //         ;
 
-                    //     mySelect.onchange = function () {
-                    //         table.column(39).search(mySelect.value).draw();
-                    //         switch (mySelect.value) {
-                    //             case '14.5904 -46.056':
-                    //                 g_prop1.textContent = "Name=4FGL J0058.3-4603,GLON=299.2,GLAT=-71.0";
-                    //                 g_prop2.textContent = "Signif=5.7,EnergyFlux100=1.0e-12cgs,Var_idx=20.5,Sig_Cur=0.0";
-                    //                 coverfact.textContent = "X-ray Covering faction=0.83;GCLASS=nan;GASSOC=nan";
-                    //                 all_clas.textContent = "All classifications: 1AGN ";
-                    //                 conf_clas.textContent = "Classifications of significant sources (S/N>=5) with CT>=2 or bright sources with Fb>5e-14 c.g.s.: / 1AGN ";
-                    //                 comment.textContent = "Comment: ";
-                    //                 break;
+                // selected_field = document.getElementById("field-select"),
 
+                // selected_field.onchange = function () {
+                //     const fieldName = fields.find(f => f.coord === this.value)?.name;
+                //     table.column(1).search(fieldName).draw();
+                // }
 
-
-                    //             default:
-                    //                 g_prop1.textContent = "Name=4FGL J1704.1-4140,GLON=344.7,GLAT=-0.2";
-                    //                 g_prop2.textContent = "Signif=5.3,EnergyFlux100=1.2e-11cgs,Var_idx=10.2,Sig_Cur=2.1";
-                    //                 coverfact.textContent = "X-ray Covering faction=1.00;GCLASS=spp;GASSOC=SNR G344.7-00.1";
-                    //                 all_clas.textContent = "All classifications: 2NS 1LMXB 2YSO 2LM-STAR ";
-                    //                 conf_clas.textContent = "Classifications of significant sources (S/N>=5) with CT>=2 or bright sources with Fb>5e-14 c.g.s.: 1LM-STAR / ";
-                    //                 comment.textContent = "Comment: ";
-
-
-                    //         }
-                    //         DescChange.textContent = mySelect.value // name
-                    //     }
-                    // }
-                    // $('#"field-select').on('change', function() {
-                    //     var mySelect2   = document.getElementById("field-select");
-                    //     table.column(3).search(mySelect2.value).draw();
-                    // });
-
-                    // });
-                };
+                    
             })
 
         }
     });
+
 </script>
 
 
