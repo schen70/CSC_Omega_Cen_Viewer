@@ -1,7 +1,7 @@
 hips_initial_fov     = 0.003578631678976464
 hips_initial_ra      = 201.85980020668276
 hips_initial_dec     = -47.59349601237918
-creator_did          = ivo://GWU/P/CSC_OmegaCen
+creator_did          = ivo://UNK.AUTH/P/CSC_OmegaCen
 #hips_creator        = HiPS creator (institute or person)
 #hips_copyright      = Copyright mention of the HiPS
 obs_title            = CSC_OmegaCen
@@ -20,7 +20,7 @@ obs_title            = CSC_OmegaCen
 #obs_regime          = Waveband keyword (Radio Infrared Optical UV X-ray Gamma-ray)
 hips_builder         = Aladin/HipsGen v12.660
 hips_version         = 1.4
-hips_release_date    = 2026-03-27T04:22Z
+hips_release_date    = 2026-04-15T18:34Z
 hips_frame           = equatorial
 hips_order           = 14
 hips_order_min       = 0
@@ -30,12 +30,14 @@ hips_status          = public master clonableOnce
 hips_pixel_scale     = 6.989E-6
 dataproduct_type     = image
 dataproduct_subtype  = color
-hips_rgb_red         = SwiftXRTred [0.0 NaN 63750.0 Linear]
-hips_rgb_green       = SwiftXRTred [0.0 NaN 64744.0 Linear]
-hips_rgb_blue        = SwiftXRTred [2.0 NaN 3078.0 Linear]
-hipsgen_date         = 2026-03-27T04:21Z
-hipsgen_params       = -maxThread=12 -clean "inRed=HIPS\\F814W" "inGreen=HIPS\\F435W" "inBlue=HIPS\\F275W" out=HIPS_RGB RGB id=GWU/P/CSC_OmegaCen
-hips_creation_date   = 2026-03-27T04:21Z
+hips_rgb_red         = SwiftXRTred [0.0 NaN 63750.0 Log]
+hips_rgb_green       = SwiftXRTred [0.0 NaN 64744.0 Log]
+hips_rgb_blue        = SwiftXRTred [2.0 NaN 3078.0 Log]
+hipsgen_date         = 2026-03-27T04:49Z
+hipsgen_params       = id=CSC_OmegaCen -clean maxThread=12 "inRed=C:\\Users\\Steven\\Downloads\\HIPS\\F814W" "inGreen=C:\\Users\\Steven\\Downloads\\HIPS\\F435W" "inBlue=C:\\Users\\Steven\\Downloads\\HIPS\\F275W" color=png "cmRed=0 63750 log" "cmGreen=0 64744 Log" "cmBlue=2 3078 Log" id=TEST/P/hipsrgb "out=C:\\Users\\Steven\\Downloads\\HIPS_RGB" RGB
+hips_creation_date   = 2026-03-27T04:49Z
 hips_overlay         = overlayMean mergeOverwriteTile treeMedian
-moc_sky_fraction     = 7.584E-7
+moc_sky_fraction     = 7.580E-7
 hips_tile_format     = png
+hipsgen_date_1       = 2026-04-15T18:34Z
+hipsgen_params_1     = id=CSC_OmegaCen -clean maxThread=12 "inRed=C:\\Users\\Steven\\Downloads\\HIPS\\F814W" "inGreen=C:\\Users\\Steven\\Downloads\\HIPS\\F435W" "inBlue=C:\\Users\\Steven\\Downloads\\HIPS\\F275W" color=png "cmRed=0 63750 log" "cmGreen=0 64744 Log" "cmBlue=2 3078 Log" id=CSC_OmegaCen "out=C:\\Users\\Steven\\Downloads\\HIPS_RGB" RGB
